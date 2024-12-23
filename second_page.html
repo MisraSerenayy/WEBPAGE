@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Liminals - Map Integration</title>
+    <!-- Include Space Grotesk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Include Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            height: 100vh;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Image with Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('foto/image 43.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 36, 27, 0.82); /* #1A241B at 82% opacity */
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        nav a {
+            margin-left: 30px;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 50px;
+        }
+
+        .main-message {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .main-message h1 {
+            font-size: 36px;
+            font-weight: 400;
+            color: white;
+        }
+
+        .main-message h1 span {
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Location Input */
+        .location-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .location-input {
+            width: 480px;
+            height: 47px;
+            background: none;
+            border: 1px solid rgba(245, 245, 245, 0.5);
+            border-radius: 24px;
+            color: rgba(255, 255, 255, 0.32);
+            font-size: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 10px 20px;
+            outline: none;
+        }
+
+        .triple-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px auto;
+        }
+
+        .triple-arrow img {
+            width: 30px;
+            height: auto;
+            margin: 5px;
+        }
+
+        /* Map Section */
+        .map-container {
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 90%;
+            max-width: 1285px;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 2px solid black;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Button */
+        .unlock-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+
+        .unlock-button a {
+            background: #F5EDE5;
+            color: #122217;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 42px;
+            box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .unlock-button a:hover {
+            background: #e5d5d0;
+        }
+    </style>
+    <!-- Include Mapbox JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+</head>
+<body>
+    <!-- Logo -->
+    <img src="foto/logo.png" alt="Logo" class="logo">
+
+    <!-- Navigation -->
+    <nav>
+        <a href="first_page.html">Home</a>
+        <a href="aboutus.html">About us</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- Main Message -->
+    <div class="main-message">
+        <h1>One step closer to <span>Change!</span></h1>
+    </div>
+
+    <!-- Location Input -->
+    <div class="location-container">
+        <input type="text" class="location-input" placeholder="Location">
+    </div>
+
+    <!-- Triple Arrow -->
+    <div class="triple-arrow">
+        <img src="foto/Arrow_Vector.svg" alt="Arrow">
+        <img src="foto/Arrow_Vector.svg" alt="Arrow">
+        <img src="foto/Arrow_Vector.svg" alt="Arrow">
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-container">
+        <div id="map"></div> <!-- Mapbox will render here -->
+    </div>
+
+    <!-- Unlock Button -->
+    <div class="unlock-button">
+        <a href="third_page.html" class="cta-button">Unlock Your City's Potential</a>
+
+    </div>
+
+    <script>
+        // Mapbox Access Token
+        mapboxgl.accessToken = 'pk.eyJ1IjoibWlzcmFzZXJlbmF5IiwiYSI6ImNtMzRkMzhqNDFsOTgybHM0ZTBjeWhpN24ifQ.rhVV8K1Ykase7f1IefTuEg';
+
+        // Initialize the map
+        const map = new mapboxgl.Map({
+            container: 'map', // Map container ID
+            style: 'mapbox://styles/misraserenay/cm4g8se37004901r4fsby3677', // Map style from Mapbox Studio
+            center: [2.2087, 41.41133], // Initial coordinates (Barcelona)
+            zoom: 13
+        });
+
+       
+    </script>
+</body>
+</html>
+
+
+
+

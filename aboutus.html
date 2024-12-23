@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Liminals - Third Page</title>
+    <!-- Integrate Space Grotesk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            height: 100vh;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Image with Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('foto/image 43.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 36, 27, 0.82); /* #1A241B at 82% opacity */
+            z-index: -1;
+        }
+         /* Grid Layout */
+         .container {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "nav nav nav"
+                "map map map";
+            width: 100%;
+            height: 100%;
+        }
+
+
+        nav {
+            grid-area: nav;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        nav a {
+            margin-left: 30px;
+            color: #F5EDE5;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 50px;
+        }
+       /* Team Section */
+       .team {
+            display: center; /* Enables flexbox for alignment */
+            flex-direction: row; /* Ensures the heading stays above the team members */
+            justify-content: center; /* Vertically centers the content */
+            align-items: flex; /* Horizontally centers the content */
+            height: 100vh; /* Makes the section take up the full height of the viewport */
+            margin: 0; /* Removes any unwanted margins */
+            text-align: center;
+            position: center;
+        }
+        .team h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        /* Team Members Container */
+        .team-members {
+            display: flex;
+            justify-content: center; /* Centers the cards horizontally */
+            align-items: center; /* Centers the cards vertically */
+            gap: 20px; /* Adds consistent spacing between cards */
+            flex-wrap: wrap; /* Ensures cards wrap to the next line on smaller screens */
+            max-width: 1200px; /* Optional: Set a max width for better alignment */
+            margin: 0 auto; /* Centers the container horizontally */
+        }
+
+        /* Team Member Card */
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 180px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            text-decoration: none; /* Remove underline from link */
+            color: #333333; /* Text color */
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .member:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        .profile-image {
+            width: 60px;
+            height: 60px;
+            background-color: #d9d9d9; /* Placeholder color for profile image */
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            width: 80%;
+            border: 0;
+            border-top: 1px solid #333333;
+            margin: 10px 0;
+        }
+
+        .member p {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="foto/logo.png" alt="Logo" class="logo">
+
+        <!-- Navigation -->
+        <nav>
+            <a href="first_page.html">Home</a>
+            <a href="#">About us</a>
+            <a href="#">Contact</a>
+        </nav>
+        <!-- Team Section -->
+        <section class="team">
+            <h3>Our Team</h3>
+            <div class="team-members">
+                <a href="https://www.linkedin.com/in/virgilio-diaz-guzman" target="_blank" class="member">
+                    <div class="profile-image"></div>
+                    <hr>
+                    <p>Virgilio Diaz Guzman</p>
+                </a>
+                <a href="https://www.linkedin.com/in/misra-ozgok-genc" target="_blank" class="member">
+                    <div class="profile-image"></div>
+                    <hr>
+                    <p>Mısra Özgök Genç</p>
+                </a>
+                <a href="https://www.linkedin.com/in/samarth-pachchigar" target="_blank" class="member">
+                    <div class="profile-image"></div>
+                    <hr>
+                    <p>Samarth Pachchigar</p>
+                </a>
+                <a href="https://www.linkedin.com/in/eleni-ntagkouli" target="_blank" class="member">
+                    <div class="profile-image"></div>
+                    <hr>
+                    <p>Eleni Ntagkouli</p>
+                </a>
+                <a href="https://www.linkedin.com/in/bhargava-sangam" target="_blank" class="member">
+                    <div class="profile-image"></div>
+                    <hr>
+                    <p>Bhargava Sangam</p>
+                </a>
+            </div>
+        </section>  
+    </div>
+</body>
+</html>
+

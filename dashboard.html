@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Page</title>
+    <!-- Integrate Space Grotesk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Sunflower:wght@300;700&family=ABeeZee&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            height: 100vh;
+            color: white;
+            background: #F4EBE2;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 270px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1A241B 0%, #0A0F0C 100%);
+            box-shadow: 4px -2px 7.4px rgba(0, 0, 0, 0.57);
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            
+        }
+        .sidebar-logo img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .sidebar-title {
+            font-size: 25px;
+            line-height: 35px;
+            font-weight: 700;
+            color: #F5EDE5;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sidebar-location {
+            display: flex;
+            align-items: center;
+            background: rgba(26, 36, 27, 0.69);
+            border-radius: 23px;
+            padding: 5px 10px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .sidebar-location img {
+            width: 14px;
+            height: 14px;
+            margin-right: 10px;
+        }
+
+        .sidebar-image {
+            width: 307px;
+            height: 246px;
+            border-radius: 21px;
+            margin-bottom: 20px;
+        }
+        .desktop-vector {
+            position: absolute;
+            width: 81px;
+            height: 105px;
+            top: 10%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            z-index: 1; 
+        }
+
+        .sidebar-menu {
+            margin: 16px 0;
+        }
+
+        .sidebar-menu-item {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            line-height: 28px;
+            color: #F5EDE5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .sidebar-menu-item img {
+            width: 14px;
+            height: 14px;
+            margin-right: 10px;
+        }
+
+       
+        /* Header */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 312px;
+            right: 0;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            background: #F4EBE2;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+        }
+
+        .header-item {
+            margin-right: 50px;
+            font-size: 30px;
+            font-weight: 300;
+            color: #1A241B;
+        }
+
+        .header-item.active {
+            font-weight: 700;
+        }
+        /* Dashboard Content */
+        .dashboard-content {
+         /* Moves the entire row of cards down */
+            position: absolute;
+            top: 150px;
+            left: 320px;
+            right: 0;
+            bottom: 0;
+            padding: 30px;
+            background: #F4EBE2;
+            display: flex; /* Enables flexbox layout */
+            flex-direction: row; /* Aligns items in a row */
+            justify-content: space-between; /* Distributes cards evenly with space in between */
+            align-items: stretch; /* Aligns cards at the top */
+            gap: 10px; /* Adds spacing between cards */
+            overflow-x: auto; /* Allows horizontal scrolling if cards overflow */
+        }
+       /* Individual Cards */
+        .dashboard-card {
+            flex: 1;
+            max-width: 320px;
+            min-width: 280px;
+            height: 370px;
+            background: transparent;
+            border-radius: 20px;
+            box-shadow: none; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        /* Ensure Uniform Content Heights */
+        .dashboard-card > * {
+            margin: 0;
+            padding: 0;
+        }
+         
+
+        .dashboard-card svg {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+        }
+
+
+        .recommendations {
+            position: absolute;
+            top: 150px; /* Matches the positioning of the dashboard cards */
+            left: 320px;
+            right: 0;
+            bottom: 0;
+            padding: 30px;
+            background: #F4EBE2; /* Same background as the dashboard section */
+            display: flex;
+            flex-direction: row; /* Aligns items in a row */
+            justify-content: space-between; /* Distributes items evenly */
+            align-items: flex-start; /* Aligns items to the top */
+            gap: 20px; /* Adds spacing between recommendations */
+        }
+
+        .recommendation {
+            width: 337px;
+            height: 298px;
+            border-radius: 20px;
+            text-align: center;
+            padding: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .recommendation span {
+            font-family: 'Sunflower', sans-serif;
+            font-size: 89px;
+            line-height: 111.32px;
+            font-weight: 700;
+        }
+
+        .recommendation.solar {
+            background: linear-gradient(180deg, #363636 0%, #014808 100%);
+        }
+
+        .recommendation.greenery {
+            background: linear-gradient(180deg, black 0%, #5F5B57 100%, #F4EBE2 100%);
+        }
+
+        .recommendation.farming {
+            background: linear-gradient(180deg, #363636 0%, #570000 100%);
+        }
+
+        /* Container for Impact Section */
+        .dashboard-content-impact {
+            position: absolute;
+            top: 150px; /* Adjust this value to position the cards properly */
+            left: 350px; /* Ensure this value moves the cards away from the sidebar */
+            right: 0;
+            padding: 30px;
+            background: #F4EBE2;
+            display: flex;
+            flex-direction: row; /* Aligns items in a row */
+            justify-content: flex-start; /* Align items from the left */
+            align-items: stretch; /* Ensures cards are the same height */
+            gap: 20px; /* Adds consistent spacing between cards */
+            overflow-x: auto; /* Allows horizontal scrolling if cards overflow */
+        }
+
+        /* Impact Cards */
+        .dashboard-card-impact {
+            flex: 1;
+            max-width: 320px;
+            min-width: 280px;
+            height: 370px;
+            background: none;
+            border-radius: 20px;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            z-index: 1; /* Ensures cards appear above other elements */
+        }
+
+        /* Hide all sections by default */
+        .section {
+            display: none;
+        }
+
+        /* Show the active section */
+        .section.active {
+            display: block;
+        }
+        /* Yellow color for the active menu item */
+        .sidebar-menu-item.active {
+            color: #FFCC00; /* Yellow color */
+            font-weight: bold;
+        }
+            /* Yellow color for the active menu item text and icon */
+        .sidebar-menu-item.active {
+            color: #FFCC00; /* Yellow text color */
+            font-weight: bold;
+        }
+
+        /* Yellow color for the active menu item's icon */
+        .sidebar-menu-item.active img {
+            filter: brightness(0) saturate(100%) invert(73%) sepia(100%) saturate(300%) hue-rotate(20deg) brightness(105%) contrast(105%);
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <a href="map_page.html">
+                <img src="foto/Arrow Circle Left.svg" alt="Back">
+            </a>
+            <img src="foto/logo.png" alt="Logo" class="logo">
+            <div class="sidebar-title">NatureSYNC HUB</div>
+        </div>
+        <div class="sidebar-location">
+            <img src="foto/location_on.svg" alt="Location">
+            Carrer de Pujades, 112, Sant Martí
+        </div>
+        <img src="foto/image 17.png" alt="Street View" class="sidebar-image">
+        <img class="vector" src="foto/Vector 11.svg" style="position: absolute; top: 300px; left: 225px; transform: translate(-50%, -10%); z-index: 1;" />
+        <div class="sidebar-menu">
+            <div class="sidebar-menu-item active" id="existing-situation-item">
+                <img src="foto/Grid 4.svg" alt="Grid"> Existing Situation
+            </div>
+            <div class="sidebar-menu-item" id="recommendations-item">
+                <img src="foto/Leaf.svg" alt="Leaf"> Recommendations
+            </div>
+            <div class="sidebar-menu-item">
+                <img src="foto/Cloud.svg" alt="Coin"> Impact
+            </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Header -->
+    <div class="header">
+        <div class="header-item active">Type: Wall</div>
+        <div class="header-item">Area: 120 sm</div>
+    </div>
+    <!-- Existing Situation Section -->
+    <div id="existing-situation" class="section active">
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Humidity Card -->
+            <div class="dashboard-card">
+                <img src="foto/Humidity.svg" alt="Humidity">
+            </div>
+
+            <!-- Pollution Card -->
+            <div class="dashboard-card">
+                <img src="foto/Pollution.svg" alt="Pollution">
+            </div>
+
+            <!-- Sun Exposure Card -->
+            <div class="dashboard-card">
+                <img src="foto/Sunexposure.svg" alt="Sun Exposure">
+            </div>
+        </div>
+    </div>
+    <!-- Recommendations Section -->
+    <div id="recommendations" class="section">
+        <div class="recommendations">
+            <div class="recommendation solar">
+                <img src="foto/image 47.png" alt="Solar Panels">
+                Solar Panels<br><span>120 kW</span>
+            </div>
+            <div class="recommendation greenery">
+                <img src="foto/image 50.png" alt="Greenery">
+                Air Purifying Greenery<br><span>120 kW</span>
+            </div>
+            <div class="recommendation farming">
+                <img src="foto/image 51.png" alt="Urban Farming">
+                Urban Farming<br><span>120 kW</span>
+            </div>
+        </div>
+    </div>
+    <!-- Impact Section -->
+    <div id="impact" class="section">
+        <!-- Dashboard Content for Impact -->
+        <div class="dashboard-content-impact">
+            <!-- Pollution Reduction Card -->
+            <div class="dashboard-card-impact">
+                
+                <img src="foto/pollution_reduction.svg" alt="Pollution Reduction">
+            </div>
+
+            <!-- Carbon Emission Reduction Card -->
+            <div class="dashboard-card-impact">
+                
+                <img src="foto/carbon_reduction.svg" alt="Carbon Emission Reduction">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+        // Add event listener for the "Recommendations" menu item
+    document.querySelector('.sidebar-menu-item:nth-child(2)').addEventListener('click', function () {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none'; // Hides all sections
+        });
+
+        // Show the "Recommendations" section
+        const recommendationsSection = document.getElementById('recommendations');
+        recommendationsSection.style.display = 'block'; // Displays only the Recommendations section
+    });
+
+    // Add event listener for the "Existing Situation" menu item
+    document.querySelector('.sidebar-menu-item:nth-child(1)').addEventListener('click', function () {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none'; // Hides all sections
+        });
+
+        // Show the "Existing Situation" section
+        const existingSituationSection = document.getElementById('existing-situation');
+        existingSituationSection.style.display = 'block'; // Displays only the Existing Situation section
+    });
+    // Add event listener for the "Impact" menu item
+    document.querySelector('.sidebar-menu-item:nth-child(3)').addEventListener('click', function () {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none'; // Hides all sections
+        });
+
+        // Show the "Impact" section
+        const impactSection = document.getElementById('impact');
+        impactSection.style.display = 'block'; // Displays only the Impact section
+    });
+
+
+    
+    // Select all menu items
+    const menuItems = document.querySelectorAll('.sidebar-menu-item');
+
+    // Add click event to each menu item
+    menuItems.forEach(item => {
+        item.addEventListener('click', function () {
+            // Remove active class from all menu items and their icons
+            menuItems.forEach(menu => {
+                menu.classList.remove('active');
+            });
+
+            // Add active class to the clicked menu item
+            this.classList.add('active');
+
+            // Show the corresponding section
+            const sectionId = this.textContent.trim().toLowerCase().replace(' ', '-');
+            const sections = document.querySelectorAll('.section');
+
+            sections.forEach(section => {
+                section.style.display = 'none'; // Hide all sections
+            });
+
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block'; // Show the corresponding section
+            }
+        });
+    });
+
+
+
+</script>
+

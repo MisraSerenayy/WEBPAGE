@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Liminals - Third Page</title>
+    <!-- Integrate Space Grotesk Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            height: 100vh;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Image with Overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('foto/image 43.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 36, 27, 0.82); /* #1A241B at 82% opacity */
+            z-index: -1;
+        }
+         /* Grid Layout */
+         .container {
+            display: grid;
+            grid-template-rows: auto 1fr;
+            grid-template-areas:
+                "nav nav nav"
+                "map map map";
+            width: 100%;
+            height: 100%;
+        }
+
+
+        nav {
+            grid-area: nav;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 50px;
+        }
+
+        nav a {
+            margin-left: 30px;
+            color: #F5EDE5;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 50px;
+        }
+
+        
+
+        /* Map Section */
+        .map-container {
+            grid-area: map;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+        }
+
+        #map {
+            grid-area: map;
+            width: 80%;
+            max-width: 1285px;
+            height: 500px;
+            border-radius: 60px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border: 2px solid black;
+        }
+        /* Search Bar Styling */
+        .search-bar {
+            grid-area: search-bar;
+            position: absolute; /* Position relative to the map container */
+            top: 30px; /* Adjust distance from the top of the map */
+            left: 200px; /* Adjust distance from the left of the map */
+            z-index: 5; /* Ensure it appears above the map */
+            background: rgba(255, 255, 255, 0.15); /* Transparent white background */
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.6); /* Semi-transparent border */
+            border-radius: 20px; /* Rounded edges */
+            padding: 5px 15px;
+            width: 200px;
+            font-size: 12px;
+            outline: none; /* Remove default browser outline */
+            font-family: 'Space Grotesk', sans-serif;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Add a subtle shadow */
+        }
+        /* Add focus effect for the search bar */
+        .search-bar:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .search-bar input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .map-container {
+            position: relative;
+            padding: 20px;
+        }
+
+        .button-container {
+            position: absolute;
+            bottom: 70px; /* Adjusts the position from the bottom of the map */
+            right: 200px; /* Adjusts the position from the right of the map */
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #fcd757; /* Button background color */
+            color: #122217; /* Button text color */
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px; /* Makes the button rounded */
+            box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.3); /* Adds a shadow */
+            transition: all 0.3s ease; /* Adds a smooth hover effect */
+        }
+
+        .btn:hover {
+            background-color: #ffd966; /* Changes background color on hover */
+            box-shadow: 3px 6px 6px rgba(0, 0, 0, 0.4); /* Enhances the shadow */
+        }
+
+
+    </style>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="foto/logo.png" alt="Logo" class="logo">
+
+        <!-- Navigation -->
+        <nav>
+            <a href="first_page.html">Home</a>
+            <a href="aboutus.html">About us</a>
+            <a href="#">Contact</a>
+        </nav>
+        
+        <!-- Map Section -->
+        <div class="map-container">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Enter Location">
+            </div>
+            <div id="map"></div>
+            <!-- Button -->
+            <div class="button-container">
+                <a href="data_map.html" class="btn">Data Map</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibWlzcmFzZXJlbmF5IiwiYSI6ImNtMzRkMzhqNDFsOTgybHM0ZTBjeWhpN24ifQ.rhVV8K1Ykase7f1IefTuEg';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/misraserenay/cm4g8se37004901r4fsby3677', // Your Mapbox Style URL
+            center: [2.2087, 41.41133], // Barcelona Coordinates
+            zoom: 13.2
+        });
+
+        map.on('load', () => {
+            // Add click functionality to the existing points
+            // Add click functionality to the existing points
+            map.on('click', 'random-locations-94mgbi', () => {
+                // Redirect to the dashboard page
+                window.location.href = 'dashboard.html';
+            });
+
+            // Change the cursor to a pointer when hovering over the points
+            map.on('mouseenter', 'random-locations-94mgbi', () => {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back when no longer hovering
+            map.on('mouseleave', 'random-locations-94mgbi', () => {
+                map.getCanvas().style.cursor = '';
+            });
+        });
+    </script>
+</body>
+</html>
+

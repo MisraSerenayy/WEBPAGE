@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cards</title>
+    <style>
+        /* General Card Styles */
+        body {
+            margin: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background: transparent;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 20px;
+            color: white;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-card {
+            width: 300px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: #F4EBE2; /* Fallback background color in case of loading delay */
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .dashboard-card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Humidity Card -->
+    <div class="dashboard-card">
+        <img src="foto/image 52.png" alt="Humidity Card" class="card-image">
+    </div>
+
+    <!-- Pollution Card -->
+    <div class="dashboard-card">
+        <img src="foto/image 53.png" alt="Pollution Card" class="card-image">
+    </div>
+
+    <!-- Sun Exposure Card -->
+    <div class="dashboard-card">
+        <img src="foto/image 54.png" alt="Sun Exposure Card" class="card-image">
+    </div>
+</body>
+</html>
